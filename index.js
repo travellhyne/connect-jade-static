@@ -1,18 +1,18 @@
 var path = require('path'),
   fs = require('fs'),
-  jade = require('jade'),
+  pug = require('pug'),
   url = require('url'),
   assert = require('assert');
 
 var defaultOptions = {
   // Jade options
-  jade: {},
-  // Serve index.jade if http://someurl/example/ is requested
+  pug: {},
+  // Serve index.pug if http://someurl/example/ is requested
   serveIndex: true,
-  // Valid jade template extensions
-  ext: ['.jade'],
+  // Valid pug template extensions
+  ext: ['.pug'],
   // Allowed request extension
-  allowedExt: ['.jade', '.htm', '.html'],
+  allowedExt: ['.pug', '.jade', '.htm', '.html'],
   // Header for Cache-Control: max-age=0
   maxAge: 0
 };
@@ -47,7 +47,7 @@ module.exports = function(opts) {
       if (!stats.isFile())
         return next();
 
-      jade.renderFile(filepath, opts.jade, function renderFile(err, html) {
+      pug.renderFile(filepath, opts.pug, function renderFile(err, html) {
         if (err)
           return next(err);
 
@@ -95,7 +95,7 @@ module.exports.getTplPath = function(requestUrl, opts) {
     requestedExt = opts.allowedExt[0];
   }
 
-  // Allow only .html .htm .jade ...
+  // Allow only .html .htm .pug ...
   if (opts.allowedExt.indexOf(requestedExt) === -1) {
     return null;
   }
