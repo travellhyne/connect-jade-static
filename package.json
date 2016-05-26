@@ -21,7 +21,7 @@
     "compile"
   ],
   "dependencies": {
-    "jade": "*"
+    "pug": "*"
   },
   "devDependencies": {
     "mocha": ">=1.12.0"
